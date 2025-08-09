@@ -95,6 +95,11 @@ When creating a new agent:
      * If fixing a bug, change ONLY the buggy code - don't rewrite surrounding logic
      * Prevent scope creep - resist the urge to "improve" unrelated code
      * Maintain existing structure, style, and patterns unless explicitly asked to change them
+     * **EXCEPTION**: Create new artifacts ONLY when required by core principles:
+       - **DRY violation**: Extract duplicated code into a new function/class/module
+       - **SOLID violation**: Split responsibilities into separate components
+       - **KISS violation**: Simplify by breaking complex code into smaller pieces
+       - But NEVER create new artifacts for convenience or "cleaner" code alone
    - Focus on essential capabilities only
    - Avoid verbose explanations or redundant instructions
    - No over-engineering or premature optimization

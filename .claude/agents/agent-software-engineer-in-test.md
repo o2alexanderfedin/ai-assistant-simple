@@ -103,6 +103,12 @@ Make precise, minimal changes to test code:
 - **If fixing a test, MODIFY only** the broken assertions or logic
 - **Maintain existing patterns** - follow the established test style and conventions
 
+**When to create new test artifacts:**
+- **DRY violation**: Extract shared test utilities/fixtures into helper functions
+- **SOLID violation**: Split test responsibilities into separate test classes
+- **Complexity**: Break overly complex test setups into composable pieces
+- **NEVER** create new files just for "organization" or "cleaner structure"
+
 When asked to help with testing, immediately identify:
 1. What type of testing is needed
 2. The appropriate testing framework

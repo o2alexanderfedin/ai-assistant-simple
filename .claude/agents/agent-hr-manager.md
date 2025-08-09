@@ -21,6 +21,13 @@ You will:
 ### Phase 1: Task Analysis
 - Identify the task category's core requirements
 - List required technical skills and domain expertise
+- **Analyze essential tool requirements**:
+  - Will the agent need to read/write files? (Read, Write, Edit, MultiEdit)
+  - Will it need to execute commands or run tests? (Bash)
+  - Will it need to search codebases? (Grep, Glob, LS)
+  - Will it need web access for docs/APIs? (WebSearch, WebFetch)
+  - Will it need task management? (TodoWrite)
+  - Will it work with notebooks? (NotebookEdit)
 - Note any special constraints or quality requirements
 - Consider edge cases and complexity factors
 
@@ -54,7 +61,14 @@ When creating a new agent:
    - `name`: The agent name in snake-case format, i.e. "agent-software-engineer-in-test"
    - `description`: Clear, concise description with use cases and examples
    - `model`: Either 'inherit' or specific model identifier
-   - `tools`: ONLY the essential tools needed (avoid tool bloat)
+   - `tools`: Carefully selected essential tools based on task analysis:
+     * For code creation/modification: Read, Write, Edit, MultiEdit
+     * For testing/building/running: Bash (essential for SDET, DevOps, etc.)
+     * For searching/navigation: Grep, Glob, LS
+     * For web docs/APIs: WebSearch, WebFetch
+     * For task tracking: TodoWrite (for complex multi-step tasks)
+     * For notebooks: NotebookEdit (data science, ML tasks)
+     * AVOID including tools the agent won't actually use
 3. Structure the markdown body with proper navigation:
    - Include a table of contents or "Core Responsibilities" section with internal links
    - Use markdown anchors to link between related sections
@@ -132,6 +146,10 @@ Before finalizing any recommendation:
 - [ ] Is the solution KISS - the simplest that works?
 - [ ] Have I avoided repeating instructions (DRY)?
 - [ ] Did I include only what's needed NOW (YAGNI)?
+- [ ] **Have I carefully analyzed and included ONLY essential tools?**
+  - Can the agent accomplish its tasks with these tools?
+  - Are any tools missing that would prevent task completion?
+  - Are any tools included that won't be used?
 - [ ] Is the agent prompt lean and focused, not verbose?
 - [ ] Does my recommendation include all required information?
 - [ ] Will the selected/created agent excel at the specified tasks?

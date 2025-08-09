@@ -24,19 +24,45 @@ Verify what already exists:
 
 ### 3. Create Memory Bank Structure
 
-Based on the type, create the following structure:
+Based on the type, create the following modular structure that follows SOLID principles (Single Responsibility - each file has ONE focused purpose):
 
 #### Project Memory Bank (.claude/memory/)
 ```
 .claude/
-├── CLAUDE.md           # Main memory file (imports others)
+├── CLAUDE.md           # Main memory file (imports index files)
 ├── memory/
-│   ├── architecture.md # System architecture & design patterns
-│   ├── conventions.md  # Coding standards & naming conventions
-│   ├── workflows.md    # Development workflows & processes
-│   ├── dependencies.md # Key dependencies & their usage
-│   ├── testing.md      # Testing strategies & patterns
-│   └── gotchas.md      # Known issues & workarounds
+│   ├── architecture/
+│   │   ├── index.md    # Architecture overview & imports
+│   │   ├── patterns.md # Design patterns used
+│   │   ├── structure.md # Component structure
+│   │   └── data-flow.md # Data flow & state management
+│   ├── conventions/
+│   │   ├── index.md    # Conventions overview & imports
+│   │   ├── javascript.md # JS/TS specific conventions
+│   │   ├── python.md   # Python specific conventions
+│   │   ├── git.md      # Git commit & branch conventions
+│   │   └── naming.md   # General naming conventions
+│   ├── workflows/
+│   │   ├── index.md    # Workflows overview & imports
+│   │   ├── development.md # Dev workflow
+│   │   ├── testing.md  # Test workflow
+│   │   ├── review.md   # Code review process
+│   │   └── deployment.md # Deploy workflow
+│   ├── dependencies/
+│   │   ├── index.md    # Dependencies overview & imports
+│   │   ├── runtime.md  # Runtime dependencies
+│   │   ├── development.md # Dev dependencies
+│   │   └── tools.md    # Build & tooling deps
+│   ├── testing/
+│   │   ├── index.md    # Testing overview & imports
+│   │   ├── unit.md     # Unit test patterns
+│   │   ├── integration.md # Integration test patterns
+│   │   └── e2e.md      # E2E test patterns
+│   └── gotchas/
+│       ├── index.md    # Gotchas overview & imports
+│       ├── platform.md # Platform-specific issues
+│       ├── configuration.md # Config pitfalls
+│       └── common.md   # Common mistakes
 └── docs/               # Ad-hoc documentation (referenced as needed)
 ```
 
@@ -59,12 +85,12 @@ This file maintains essential context for Claude Code sessions.
 - **Key Directories**: [Important folders and their purposes]
 
 ## Imports
-@.claude/memory/architecture.md
-@.claude/memory/conventions.md
-@.claude/memory/workflows.md
-@.claude/memory/dependencies.md
-@.claude/memory/testing.md
-@.claude/memory/gotchas.md
+@.claude/memory/architecture/index.md
+@.claude/memory/conventions/index.md
+@.claude/memory/workflows/index.md
+@.claude/memory/dependencies/index.md
+@.claude/memory/testing/index.md
+@.claude/memory/gotchas/index.md
 
 ## Quick Reference
 - Build command: `[your build command]`
@@ -78,98 +104,149 @@ This file maintains essential context for Claude Code sessions.
 
 ### 5. Initialize Memory Modules
 
-Create each memory module with appropriate templates:
+Create index files and specific modules following Single Responsibility:
 
-**architecture.md**:
+**architecture/index.md**:
 ```markdown
-# System Architecture
+# Architecture Overview
 
-## Design Patterns
-- [Pattern used]: [Where and why]
+Modular architecture documentation following SOLID principles.
 
-## Component Structure
-- [Component]: [Responsibility]
-
-## Data Flow
-- [Flow description]
+## Imports
+@.claude/memory/architecture/patterns.md
+@.claude/memory/architecture/structure.md
+@.claude/memory/architecture/data-flow.md
 ```
 
-**conventions.md**:
+**architecture/patterns.md**:
 ```markdown
-# Coding Conventions
+# Design Patterns
 
-## Style Guide
-- Indentation: [spaces/tabs, size]
-- Line length: [max characters]
-- File naming: [pattern]
-
-## Code Organization
-- [Specific patterns used]
-
-## Git Conventions
-- Commit format: [conventional commits, etc.]
-- Branch naming: [pattern]
+## Pattern: [Name]
+- **Used in**: [Where]
+- **Purpose**: [Why]
+- **Implementation**: [How]
 ```
 
-**workflows.md**:
+**conventions/index.md**:
 ```markdown
-# Development Workflows
+# Conventions Overview
 
-## Development Process
-1. [Step-by-step workflow]
+Language-specific and general conventions.
 
-## Review Process
-- [PR requirements]
-- [Review checklist]
-
-## Deployment Process
-- [Deployment steps]
+## Imports
+@.claude/memory/conventions/javascript.md
+@.claude/memory/conventions/python.md
+@.claude/memory/conventions/git.md
+@.claude/memory/conventions/naming.md
 ```
 
-**dependencies.md**:
+**conventions/javascript.md**:
 ```markdown
-# Key Dependencies
+# JavaScript/TypeScript Conventions
+
+## Style
+- Indentation: [2/4 spaces]
+- Semicolons: [yes/no]
+- Quotes: [single/double]
+
+## Patterns
+- [Specific JS patterns]
+```
+
+**workflows/index.md**:
+```markdown
+# Workflows Overview
+
+Separate workflows for different processes.
+
+## Imports
+@.claude/memory/workflows/development.md
+@.claude/memory/workflows/testing.md
+@.claude/memory/workflows/review.md
+@.claude/memory/workflows/deployment.md
+```
+
+**workflows/development.md**:
+```markdown
+# Development Workflow
+
+## Local Setup
+1. [Step]
+
+## Daily Process
+1. [Step]
+```
+
+**dependencies/index.md**:
+```markdown
+# Dependencies Overview
+
+Categorized dependency management.
+
+## Imports
+@.claude/memory/dependencies/runtime.md
+@.claude/memory/dependencies/development.md
+@.claude/memory/dependencies/tools.md
+```
+
+**dependencies/runtime.md**:
+```markdown
+# Runtime Dependencies
 
 ## Core Libraries
-- [Library]: [Version] - [Usage]
-
-## Development Tools
-- [Tool]: [Purpose]
-
-## Important Versions
-- Node/Python/etc.: [version]
+- [Library]: [Version]
+  - Purpose: [Why needed]
+  - Usage: [How used]
 ```
 
-**testing.md**:
+**testing/index.md**:
 ```markdown
-# Testing Strategy
+# Testing Overview
 
-## Test Structure
-- Unit tests: [location, framework]
-- Integration tests: [location, framework]
-- E2E tests: [location, framework]
+Modular testing documentation.
 
-## Coverage Requirements
-- Target coverage: [percentage]
-- Critical paths: [areas that must be tested]
-
-## Test Commands
-- Run all tests: `[command]`
-- Run specific suite: `[command]`
+## Imports
+@.claude/memory/testing/unit.md
+@.claude/memory/testing/integration.md
+@.claude/memory/testing/e2e.md
 ```
 
-**gotchas.md**:
+**testing/unit.md**:
 ```markdown
-# Known Issues & Workarounds
+# Unit Testing
 
-## Common Pitfalls
-- [Issue]: [Solution]
+## Framework
+- Tool: [Jest/Pytest/etc.]
+- Location: [test directory]
 
-## Platform-Specific Issues
-- [Platform]: [Issue and workaround]
+## Patterns
+- [Pattern]: [Usage]
 
-## Configuration Gotchas
-- [Config issue]: [Correct approach]
+## Commands
+- Run: `[command]`
+```
+
+**gotchas/index.md**:
+```markdown
+# Gotchas Overview
+
+Categorized known issues and solutions.
+
+## Imports
+@.claude/memory/gotchas/platform.md
+@.claude/memory/gotchas/configuration.md
+@.claude/memory/gotchas/common.md
+```
+
+**gotchas/common.md**:
+```markdown
+# Common Pitfalls
+
+## Issue: [Name]
+- **Symptom**: [What happens]
+- **Cause**: [Why it happens]
+- **Solution**: [How to fix]
 ```
 
 ### 6. Create docs/ Directory
@@ -194,7 +271,10 @@ Provide a summary of:
 - Remove obsolete information regularly
 - Use bullet points for clarity
 - Group related items under headings
-- Keep core memory files under 500 lines
+- Keep each file focused on ONE responsibility (SOLID)
+- Split large files into smaller, focused modules
+- Use index.md files to aggregate related memories
+- Keep individual memory files under 100 lines
 - Use @docs/ references for occasional information
 - Update memories when correcting Claude about project details
 

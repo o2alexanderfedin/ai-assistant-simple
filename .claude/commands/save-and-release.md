@@ -18,10 +18,13 @@ For complete git flow command reference, see: `.claude/docs/git/gitflow-commands
 ## Workflow Steps
 
 ### 1. Analyze Arguments and Repository State
+**ALWAYS START WITH `git status`** - Never assume file states from conversation!
+
 Parse the provided arguments: `$ARGUMENTS`
 - First word should be the flow type: `feature`, `bugfix`, `hotfix`, `release`, or `support`
 - Remaining words form the name/version
 - If no arguments provided:
+  - **Run `git status` first** to check working tree state
   - Check current branch to determine if in an active flow
   - If on feature/bugfix/hotfix branch: finish that flow first
   - Then check for unreleased commits on develop
@@ -44,12 +47,18 @@ Use git flow commands based on the type. For complete syntax reference, see:
 - `-F`: Fetch before operation
 
 ### 3. Pre-operation Checks
+**CRITICAL: Always use `git status` to discover actual changes - NEVER assume or guess from conversation history!**
+
 Run these checks before any git flow operation:
-- `git status` to see uncommitted changes
+- **ALWAYS START WITH**: `git status` to see uncommitted changes and modified files
+- `git diff` to review the actual changes in modified files
+- `git diff --cached` to see staged changes
 - `git flow config` to verify git flow is initialized
 - Check current branch with `git branch --show-current`
 - Verify no existing flow of same type with `git flow [type] list`
 - Read VERSION file if it exists (for version determination)
+
+**Important**: Never assume files have changed based on previous conversation. Always verify with `git status` first!
 
 ### 4. Commit Workflow
 For features/bugfixes with uncommitted changes:
@@ -134,6 +143,13 @@ After finishing a release or hotfix:
 
 ## Important Guidelines
 
+### File Discovery Rules
+- **ALWAYS use `git status` first** - Never assume which files changed
+- **Never guess file states** from previous conversation context
+- **Always verify changes** with `git diff` before committing
+- **Check both staged and unstaged** changes before proceeding
+
+### Git Flow Rules
 - **ALL GIT FLOWS MUST BE FINISHED** - never leave flows open
 - Git flow manages branch creation/deletion automatically
 - NEVER manually create feature/release/hotfix branches

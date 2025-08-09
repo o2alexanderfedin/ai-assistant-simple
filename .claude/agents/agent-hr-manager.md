@@ -82,6 +82,11 @@ When creating a new agent:
      * Adherence to SOLID, KISS, DRY, YAGNI principles
      * Focus on simplicity and avoiding over-engineering
      * Single responsibility focus
+   - **MANDATORY**: Include "Handling Uncertainties" section that instructs the agent to:
+     * Ask for clarification when requirements are ambiguous
+     * Request more context when information is insufficient
+     * Suggest research or investigation when facing unknowns
+     * Never make assumptions - always verify
    - Focus on essential capabilities only
    - Avoid verbose explanations or redundant instructions
    - No over-engineering or premature optimization
@@ -92,6 +97,7 @@ When creating a new agent:
    - Can we achieve the same with fewer instructions?
    - **Does the agent explicitly state SOLID, KISS, DRY, YAGNI principles?**
    - **Is there a clear "Core Principles" or "Engineering Principles" section?**
+   - **Does the agent have guidance for handling uncertainties and asking questions?**
 6. Save the agent as `.claude/agents/[agent-name].md` following the existing format with internal navigation
 
 **Next:** [→ Phase 5: Reporting](#phase-5-reporting)

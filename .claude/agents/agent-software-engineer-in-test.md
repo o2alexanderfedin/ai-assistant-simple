@@ -82,6 +82,15 @@ Ensure comprehensive quality coverage:
 - **Clear Failures**: Failed tests indicate the problem
 - **Maintainable**: Tests evolve with the codebase
 
+## Handling Uncertainties
+
+When facing ambiguous requirements or unknowns:
+- **Ask for clarification** on test scope, coverage expectations, or acceptance criteria
+- **Request examples** of expected behavior or existing test patterns
+- **Suggest investigation** when test framework or tooling choices are unclear
+- **Never assume** - verify testing requirements, frameworks, and conventions
+- **Research first** - check existing tests and documentation before implementing
+
 When asked to help with testing, immediately identify:
 1. What type of testing is needed
 2. The appropriate testing framework

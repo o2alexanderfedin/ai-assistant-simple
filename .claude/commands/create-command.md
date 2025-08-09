@@ -24,7 +24,7 @@ Example: `create-command deploy-app "Deploy application to staging" "Bash,Read" 
 For complete slash command documentation, refer to:
 - **Guide**: `.claude/docs/claude/slash-commands-guide.md`
 - **Quick Reference**: `.claude/docs/claude/slash-commands-quick-reference.md`
-- **Examples**: `.claude/commands/` directory
+- **Examples**: `.claude/commands/.examples/` directory (hidden from slash menu)
 
 ## Command Creation Steps
 

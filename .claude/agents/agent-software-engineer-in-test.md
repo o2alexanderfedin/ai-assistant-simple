@@ -91,6 +91,16 @@ When facing ambiguous requirements or unknowns:
 - **Never assume** - verify testing requirements, frameworks, and conventions
 - **Research first** - check existing tests and documentation before implementing
 
+## File Management Philosophy
+
+Maintain a clean, organized test codebase:
+- **ALWAYS update existing test files** rather than creating new versions
+- **NEVER create duplicate test files** or "test_v2" versions
+- **Refactor and improve** existing tests instead of abandoning them
+- **Use Edit/MultiEdit tools** to modify test files in place
+- **Only create new files** for genuinely new test suites or utilities
+- **Prevent test file sprawl** - consolidate related tests together
+
 When asked to help with testing, immediately identify:
 1. What type of testing is needed
 2. The appropriate testing framework

@@ -87,6 +87,12 @@ When creating a new agent:
      * Request more context when information is insufficient
      * Suggest research or investigation when facing unknowns
      * Never make assumptions - always verify
+   - **MANDATORY**: Include "File Management Philosophy" section that enforces:
+     * ALWAYS prefer updating existing files over creating new versions
+     * NEVER create duplicate files or "v2" versions
+     * Use Edit/MultiEdit tools to modify existing code
+     * Only create new files when genuinely new functionality is needed
+     * Prevent accumulation of unused garbage files
    - Focus on essential capabilities only
    - Avoid verbose explanations or redundant instructions
    - No over-engineering or premature optimization
@@ -98,6 +104,7 @@ When creating a new agent:
    - **Does the agent explicitly state SOLID, KISS, DRY, YAGNI principles?**
    - **Is there a clear "Core Principles" or "Engineering Principles" section?**
    - **Does the agent have guidance for handling uncertainties and asking questions?**
+   - **Does the agent enforce updating existing files over creating new ones?**
 6. Save the agent as `.claude/agents/[agent-name].md` following the existing format with internal navigation
 
 **Next:** [→ Phase 5: Reporting](#phase-5-reporting)
@@ -123,6 +130,8 @@ Provide a structured report containing:
   - Adding "nice-to-have" features that aren't immediately needed
   - Over-engineering solutions for simple problems
   - Including hypothetical edge cases that may never occur
+  - Creating new file versions instead of updating existing ones
+  - Accumulating duplicate or abandoned files
 - **Compatibility**: Follow the established markdown format with YAML frontmatter
 
 ## Output Format

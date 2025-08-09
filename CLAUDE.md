@@ -54,6 +54,14 @@ This file maintains essential context for Claude Code sessions on the AI Assista
 - `.claude/commands/save-and-release.md` - Release automation
 - `.claude/commands/init-memory-bank.md` - Memory bank setup
 
+## Memory Imports
+@.claude/memory/architecture/index.md
+@.claude/memory/conventions/index.md
+@.claude/memory/workflows/index.md
+@.claude/memory/dependencies/index.md
+@.claude/memory/testing/index.md
+@.claude/memory/gotchas/index.md
+
 ## Project-Specific Rules
 1. Agents must explicitly state adherence to engineering principles
 2. New agents require thorough tool analysis

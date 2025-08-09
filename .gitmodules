@@ -1,0 +1,3 @@
+[submodule ".claude/templated-agents"]
+	path = .claude/templated-agents
+	url = https://github.com/o2alexanderfedin/templated-agents.git

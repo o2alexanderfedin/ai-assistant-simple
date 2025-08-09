@@ -1,0 +1,62 @@
+#!/bin/bash
+
+# Git hook to prevent direct commits to protected branches
+# and remind about gitflow usage
+
+# Get current branch name
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+# Define protected branches
+PROTECTED_BRANCHES="^(main|master|develop)$"
+
+# Check if we're on a protected branch
+if [[ "$BRANCH" =~ $PROTECTED_BRANCHES ]]; then
+    echo "❌ DIRECT COMMIT TO PROTECTED BRANCH BLOCKED!"
+    echo ""
+    echo "You are trying to commit directly to '$BRANCH' branch."
+    echo "This violates gitflow conventions."
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "🚨 IMPORTANT REMINDER FOR CLAUDE AND HUMANS:"
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "**GITFLOW SCOPE MUST BE USED**"
+    echo ""
+    echo "You MUST use git flow commands instead of direct commits:"
+    echo ""
+    echo "For new features:"
+    echo "  git flow feature start <feature-name>"
+    echo "  # make your commits here"
+    echo "  git flow feature finish <feature-name>"
+    echo ""
+    echo "For bug fixes:"
+    echo "  git flow bugfix start <bugfix-name>"
+    echo "  # make your commits here"
+    echo "  git flow bugfix finish <bugfix-name>"
+    echo ""
+    echo "For hotfixes (emergency production fixes):"
+    echo "  git flow hotfix start <version>"
+    echo "  # make your commits here"
+    echo "  git flow hotfix finish <version>"
+    echo ""
+    echo "For releases:"
+    echo "  git flow release start <version>"
+    echo "  # make your commits here"
+    echo "  git flow release finish <version>"
+    echo ""
+    echo "Alternative: Use the /save-and-release slash command"
+    echo "which automates gitflow operations."
+    echo ""
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo "This is a MANDATORY requirement. The commit has been BLOCKED."
+    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+    echo ""
+    echo "To bypass this hook in emergency (NOT RECOMMENDED):"
+    echo "  git commit --no-verify -m \"message\""
+    echo ""
+    exit 1
+fi
+
+# Allow commits on feature/bugfix/hotfix/release branches
+echo "✅ Commit allowed on branch: $BRANCH"
+exit 0

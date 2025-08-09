@@ -55,7 +55,14 @@ Run these checks before any git flow operation:
 - `git diff --cached` to see staged changes
 - `git flow config` to verify git flow is initialized
 - Check current branch with `git branch --show-current`
-- Verify no existing flow of same type with `git flow [type] list`
+- **CHECK ALL OPEN FLOWS**:
+  ```bash
+  git flow feature list
+  git flow bugfix list 2>/dev/null
+  git flow release list  
+  git flow hotfix list
+  ```
+  If any flows are listed, they MUST be finished before creating new ones!
 - Read VERSION file if it exists (for version determination)
 
 **Important**: Never assume files have changed based on previous conversation. Always verify with `git status` first!
@@ -113,7 +120,31 @@ Similar to release, but starts from main/master instead of develop.
 
 ### 6. Auto-Release Logic (When No Arguments Provided)
 
-**Step 1: Check and finish active flows**:
+**Step 1: Check and finish ALL active flows**:
+
+First, check for any open flows regardless of current branch:
+```bash
+# Check all open flows
+git flow feature list
+git flow bugfix list 2>/dev/null  # May not exist in nvie version
+git flow release list
+git flow hotfix list
+```
+
+If ANY open flows are found:
+1. **Feature/Bugfix branches**: 
+   - Commit any uncommitted changes
+   - `git flow [type] finish <name>`
+   - Note: Multiple features/bugfixes may be open - finish ALL
+2. **Release branches**:
+   - Update VERSION if needed
+   - Commit changes
+   - Finish with proper tagging (see release flow above)
+3. **Hotfix branches**:
+   - Commit changes
+   - Finish with proper tagging
+
+Then check current branch:
 - If on `feature/*` branch: finish the feature first
 - If on `bugfix/*` branch: finish the bugfix first  
 - If on `hotfix/*` branch: finish the hotfix first
@@ -140,6 +171,36 @@ After finishing a release or hotfix:
 1. The git flow finish creates a tag automatically
 2. Push tags with `git push --tags`
 3. Create GitHub release: `gh release create v[version] --generate-notes`
+
+## Handling Unfinished Flows
+
+**CRITICAL: Always finish ALL open flows before starting new ones!**
+
+When detecting open flows:
+1. **List all open flows first**:
+   ```bash
+   git flow feature list | grep -v "No feature branches"
+   git flow release list | grep -v "No release branches"
+   git flow hotfix list | grep -v "No hotfix branches"
+   ```
+
+2. **For each open flow found**:
+   - Save current work: `git stash` if needed
+   - Switch to the flow branch
+   - Commit any uncommitted changes
+   - Finish the flow properly
+   - Return to original work
+
+3. **Priority order for finishing**:
+   - Hotfixes first (production issues)
+   - Releases second (ready for production)
+   - Features/bugfixes last (development work)
+
+4. **Never leave flows hanging** - this causes:
+   - Merge conflicts
+   - Version confusion
+   - Branch proliferation
+   - CI/CD pipeline issues
 
 ## Important Guidelines
 

@@ -78,6 +78,10 @@ When creating a new agent:
    - **KISS**: Keep instructions simple and straightforward
    - **DRY**: Don't repeat instructions or concepts
    - **YAGNI**: Only include what's needed NOW, not hypothetical features
+   - **MANDATORY**: Include a "Core Principles" section in EVERY agent that explicitly states:
+     * Adherence to SOLID, KISS, DRY, YAGNI principles
+     * Focus on simplicity and avoiding over-engineering
+     * Single responsibility focus
    - Focus on essential capabilities only
    - Avoid verbose explanations or redundant instructions
    - No over-engineering or premature optimization
@@ -86,6 +90,8 @@ When creating a new agent:
    - Does every instruction serve a clear, immediate purpose?
    - Are we duplicating any existing agent capabilities?
    - Can we achieve the same with fewer instructions?
+   - **Does the agent explicitly state SOLID, KISS, DRY, YAGNI principles?**
+   - **Is there a clear "Core Principles" or "Engineering Principles" section?**
 6. Save the agent as `.claude/agents/[agent-name].md` following the existing format with internal navigation
 
 **Next:** [→ Phase 5: Reporting](#phase-5-reporting)

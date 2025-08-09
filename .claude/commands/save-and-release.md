@@ -65,34 +65,42 @@ For features/bugfixes with uncommitted changes:
 
 **CRITICAL: All flows must be properly finished!**
 
+First, detect git flow version:
+```bash
+git flow version
+# 0.4.x = original nvie/gitflow (limited flags)
+# 1.x.x = AVH Edition (full flag support)
+```
+
 **For feature/bugfix flows**:
 1. If starting new: `git flow [type] start <name>`
 2. Stage and commit all changes: `git add . && git commit -m "message"`
-3. **ALWAYS FINISH**: `git flow [type] finish -p <name>` (use -p to auto-push)
-4. If -p not used: `git push origin develop`
+3. **ALWAYS FINISH**: `git flow [type] finish <name>`
+4. Push develop: `git push origin develop`
 5. Clean up remote: `git push origin --delete [type]/<name>` (if published)
 6. **Then check if release is needed** (see step 6)
-
-**For hotfix flows**:
-1. If starting new: `git flow hotfix start <version>`
-2. Stage and commit all changes
-3. **ALWAYS FINISH**: `git flow hotfix finish -pm "Hotfix v<version>" <version>`
-   - `-p` pushes automatically
-   - `-m` provides tag message non-interactively
-4. If -p not used: `git push --all && git push --tags`
-5. Create GitHub release: `gh release create v<version> --generate-notes`
 
 **For release flows**:
 1. **ALWAYS after finishing features/bugfixes**
 2. Determine version from commit history
-3. `git flow release start -F <version>` (-F fetches latest)
+3. `git flow release start <version>`
 4. Update VERSION file if exists
 5. Commit version changes
-6. **ALWAYS FINISH**: `git flow release finish -pm "Release v<version>" <version>`
-   - `-p` pushes automatically
-   - `-m` provides tag message non-interactively
-7. If -p not used: `git push --all && git push --tags`
+6. **FINISH RELEASE**:
+   - **AVH Edition**: `git flow release finish -m "Release v<version>" <version>`
+   - **Original nvie**: 
+     ```bash
+     export GIT_MERGE_AUTOEDIT=no
+     git flow release finish <version>
+     # If tag fails, manually create:
+     git tag -a v<version> -m "Release v<version>"
+     # Complete merge to develop manually if needed
+     ```
+7. Push all: `git push --all && git push --tags`
 8. Create GitHub release: `gh release create v<version> --generate-notes`
+
+**For hotfix flows**:
+Similar to release, but starts from main/master instead of develop.
 
 ### 6. Auto-Release Logic (When No Arguments Provided)
 

@@ -15,12 +15,14 @@ Parse the provided arguments: `$ARGUMENTS`
 - If "project" or no argument: Initialize project-specific memory
 - If "team": Initialize team-shared memory configuration
 - If "personal": Initialize user-specific preferences
+- If "maintain" or "update": Only update index.md files
 
 ### 2. Check Existing Structure
 Verify what already exists:
 - Check for existing CLAUDE.md in project root
 - Check for .claude/memory/ directory
 - Check for docs/ directory
+- List existing memory files in each category
 
 ### 3. Create Memory Bank Structure
 
@@ -249,7 +251,47 @@ Categorized known issues and solutions.
 - **Solution**: [How to fix]
 ```
 
-### 6. Create docs/ Directory
+### 6. Maintain Index Files
+
+**Auto-generate/update index.md files**:
+
+For each memory category directory:
+1. Scan for all .md files (excluding index.md)
+2. Update the index.md with proper imports
+3. Preserve any custom header text and description
+4. Sort imports alphabetically for consistency
+
+Process for each category (architecture, conventions, workflows, dependencies, testing, gotchas):
+```bash
+# List all non-index markdown files
+ls .claude/memory/[category]/*.md | grep -v index.md | sort
+
+# Read existing index.md to preserve description
+# Extract content before "## Imports" section
+# Generate new imports section with all found files
+# Write updated index.md
+```
+
+Template for maintaining index.md:
+```markdown
+# [Category] Overview
+
+[Preserve existing description if present]
+
+## Imports
+@.claude/memory/[category]/[file1].md
+@.claude/memory/[category]/[file2].md
+@.claude/memory/[category]/[file3].md
+```
+
+**Important**: 
+- Always preserve existing descriptions and custom content
+- Only update the "## Imports" section
+- Sort files alphabetically for predictable order
+- Skip empty directories
+- Create index.md if it doesn't exist
+
+### 7. Create docs/ Directory
 Create a docs/ directory for ad-hoc documentation:
 ```
 docs/
@@ -257,7 +299,7 @@ docs/
 └── examples/           # Example configurations, snippets
 ```
 
-### 7. Report Completion
+### 8. Report Completion
 
 Provide a summary of:
 - Files created
@@ -277,6 +319,7 @@ Provide a summary of:
 - Keep individual memory files under 100 lines
 - Use @docs/ references for occasional information
 - Update memories when correcting Claude about project details
+- Run maintenance to keep index.md files in sync with directory contents
 
 ## Usage Instructions
 
@@ -285,5 +328,6 @@ After initialization:
 2. Use `/memory` command to edit during sessions
 3. Reference specific docs with @docs/filename when needed
 4. Regularly audit and update as the project evolves
+5. Run `/init-memory-bank maintain` to update index.md files after adding new memory files
 
 Remember: The memory bank is living documentation that helps Claude Code understand your project's unique context and requirements.

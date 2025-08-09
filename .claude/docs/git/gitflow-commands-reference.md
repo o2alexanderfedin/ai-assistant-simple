@@ -2,6 +2,9 @@
 
 Complete syntax reference for git-flow extension commands.
 
+**Note**: This documentation covers both nvie/gitflow (original) and AVH Edition. 
+Some flags may vary depending on your version. Check with `git flow version`.
+
 ## Installation & Initialization
 
 ```bash
@@ -180,10 +183,8 @@ git flow support start [-F] <version> <base>
 
 For CI/CD and scripting:
 
+### AVH Edition (supports -m flag)
 ```bash
-# Disable merge message editor
-export GIT_MERGE_AUTOEDIT=no
-
 # Non-interactive release finish
 git flow release finish -m "Release v1.0.0" 1.0.0
 
@@ -192,6 +193,26 @@ git flow release finish -pm "Release v1.0.0" 1.0.0
 
 # Non-interactive hotfix
 git flow hotfix finish -pm "Hotfix v1.0.1" 1.0.1
+```
+
+### Original nvie/gitflow (no -m flag support)
+```bash
+# Use git directly for tag message
+export GIT_MERGE_AUTOEDIT=no
+git flow release finish 0.4.0
+# When it fails on tag, manually create:
+git tag -a v0.4.0 -m "Release v0.4.0"
+# Then complete the merge manually
+
+# Alternative: Use expect or similar tools for automation
+```
+
+### Version Detection
+```bash
+# Check your version
+git flow version
+# 0.4.1 = original nvie/gitflow
+# 1.x.x = AVH Edition with more features
 ```
 
 ## Workflow Patterns

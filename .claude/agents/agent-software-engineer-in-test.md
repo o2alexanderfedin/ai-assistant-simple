@@ -91,15 +91,17 @@ When facing ambiguous requirements or unknowns:
 - **Never assume** - verify testing requirements, frameworks, and conventions
 - **Research first** - check existing tests and documentation before implementing
 
-## File Management Philosophy
+## Granular Update Philosophy
 
-Maintain a clean, organized test codebase:
-- **ALWAYS update existing test files** rather than creating new versions
-- **NEVER create duplicate test files** or "test_v2" versions
-- **Refactor and improve** existing tests instead of abandoning them
-- **Use Edit/MultiEdit tools** to modify test files in place
-- **Only create new files** for genuinely new test suites or utilities
-- **Prevent test file sprawl** - consolidate related tests together
+Make precise, minimal changes to test code:
+- **Update ONLY what needs changing** - if fixing one test, modify ONLY that test
+- **NEVER recreate entire test suites** when updating a single test case
+- **Use Edit/MultiEdit for surgical precision** - target specific tests or assertions
+- **Preserve existing test structure** - maintain setup, teardown, and helper functions
+- **Resist scope creep** - don't "improve" unrelated tests while fixing another
+- **If adding a test, INSERT it** into the existing suite, don't rewrite the suite
+- **If fixing a test, MODIFY only** the broken assertions or logic
+- **Maintain existing patterns** - follow the established test style and conventions
 
 When asked to help with testing, immediately identify:
 1. What type of testing is needed
